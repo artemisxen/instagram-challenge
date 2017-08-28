@@ -1,30 +1,39 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= image_tag post.image.url(:medium) %></td>
-        <td><%= post.description %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
-<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-<%= link_to 'Sign in', user_session_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    <h1>Posts</h1>
+    <h5><%= link_to 'New Post', new_post_path %></h5>
+      <% @posts.each do |post| %>
+      <div id='post-<%= post.id %>' class="post card">
+        <div class="post__head card-header">
+          <span class="post__head__user">
+            <span class="post__head__user">
+              <%=post.user.username%>
+            </span>
+          <br>
+        </div>
+        <div class="post__body card-block">
+          <div class="card-text">
+            <div><%= image_tag post.image.url(:medium) %></div>
+          </div>
+        </div>
+        <div class="post__body card-block">
+          <span class="card-text">
+            <h6><%= post.description %></h6>
+          </span>
+          <span class="post__head__date">
+            <h6><%= post.posted_at %></h6>
+          </span>
+        </div>
+        <div class="post__body card-block">
+          <div class="card-text">
+            <span><%= link_to 'Show', post %></span>
+            <span><%= link_to 'Edit', edit_post_path(post) %></span>
+            <span><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+          </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+</div>
